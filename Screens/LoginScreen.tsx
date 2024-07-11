@@ -1,9 +1,8 @@
 import { Alert, Button, StyleSheet, Text, TouchableOpacity, TouchableOpacityBase, View } from 'react-native'
 import React, { useState } from 'react'
 import { TextInput } from 'react-native-gesture-handler';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../Config/Config';
-
+import { signInWithEmailAndPassword } from 'firebase/auth';
 export default function LoginScreen({ navigation }: any) {
   const [correo, setCorreo] = useState('')
   const [clave, setClave] = useState('')
@@ -12,30 +11,30 @@ function singIn(){
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
-    navigation.navigate('Drawer')
+    navigation.navigate('Tab')
     // ...
   })
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
-    let mensaje=""
-    let descripcion=""
+    let titulo=""
+    let destalle=""
     switch (errorCode) {
       case "auth/missing-email":
-          mensaje="Correo Invalido"
-          descripcion="Error de correo electronico, revise sus credenciales"
+          titulo="Correo Invalido"
+          destalle="Error de correo electronico, revise sus credenciales"
         
         break;
     case "auth/missing-password":
-      mensaje="Contraseña incorrecta"
-          descripcion="Error de contraseña, revise sus credenciales"
+      titulo="Contraseña incorrecta"
+          destalle="Error de contraseña, revise sus credenciales"
      break;
       default:
-            mensaje="Error de Ingreso"
-          descripcion="revise sus credenciales"
+            titulo="Error de Ingreso"
+          destalle="revise sus credenciales"
         break;
     }    
-    Alert.alert(mensaje,descripcion);
+    Alert.alert(titulo,destalle);
   });
 }
   return (
