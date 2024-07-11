@@ -15,11 +15,11 @@ function historial(){
       const data = snapshot.val();
       console.log(data)
       
-      const listaTem : any =Object.keys(data).map((id)=>({
+        const listaTem : any =Object.keys(data).map((id)=>({
         id,...data[id]       }))
         // console.log(listaTem)
         setlista(listaTem)
-    });  
+    });
 }
 
 useEffect(() => {
